@@ -98,7 +98,7 @@ Once you have a good zarr file, upload it to the NRP shared workspace so trainin
 ### Launch the staging pod
 
 ```bash
-kubectl apply -f /home/shrestha/isl_umi_cube_hand_off/nrp/pvc_stage_pod.yaml
+kubectl apply -f folder_path/isl_umi_cube_hand_off/nrp/pvc_stage_pod.yaml
 kubectl wait --for=condition=Ready pod/pvc-stage -n ssu-intelligent-systems --timeout=120s
 ```
 
