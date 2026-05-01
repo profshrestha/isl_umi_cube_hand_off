@@ -23,7 +23,7 @@ Your session directory must be organized before running the pipeline.
 Transfer your videos to the workstation and arrange them as follows:
 
 ```
-/home/shrestha/sudhir_umi/datasets/<your_session>/
+file_path/datasets/<your_session>/
 └── raw_videos/
     ├── mapping.mp4
     ├── gripper_calibration/
@@ -46,7 +46,7 @@ Activate the conda environment and run:
 ```bash
 conda run -n umi --no-capture-output \
   python /opt/umi/universal_manipulation_interface/run_slam_pipeline.py \
-  /home/shrestha/sudhir_umi/datasets/<your_session>/
+  file_path/datasets/<your_session>/
 ```
 
 This runs steps 00–07 automatically. The full pipeline takes **1–2 hours** depending on the number of clips.
@@ -73,8 +73,8 @@ Pipeline complete. Replay buffer saved to: <your_session>/replay_buffer.zarr.zip
 ```bash
 python - <<'EOF'
 import zarr, zipfile
-with zipfile.ZipFile("/home/shrestha/sudhir_umi/datasets/<your_session>/replay_buffer.zarr.zip") as zf:
-    store = zarr.ZipStore("/home/shrestha/sudhir_umi/datasets/<your_session>/replay_buffer.zarr.zip", mode='r')
+with zipfile.ZipFile("file_path/datasets/<your_session>/replay_buffer.zarr.zip") as zf:
+    store = zarr.ZipStore("file_path/datasets/<your_session>/replay_buffer.zarr.zip", mode='r')
     root = zarr.open(store, 'r')
     print(f"Episodes: {len(root['meta/episode_ends'])}")
     print(f"Total frames: {root['meta/episode_ends'][-1]}")
@@ -106,7 +106,7 @@ kubectl wait --for=condition=Ready pod/pvc-stage -n ssu-intelligent-systems --ti
 
 ```bash
 kubectl cp \
-  /home/shrestha/sudhir_umi/datasets/<your_session>/replay_buffer.zarr.zip \
+  file_path/datasets/<your_session>/replay_buffer.zarr.zip \
   ssu-intelligent-systems/pvc-stage:/workspace/data/<your_session>.zarr.zip
 ```
 
@@ -132,7 +132,7 @@ Then follow **[Step 3 — NRP Training](03_nrp_training.md)**.
 
 Check that `mapping.mp4` exists and is a valid video:
 ```bash
-ffprobe /home/shrestha/sudhir_umi/datasets/<your_session>/raw_videos/mapping.mp4
+ffprobe file_path/datasets/<your_session>/raw_videos/mapping.mp4
 ```
 If the mapping step fails, the rest of the pipeline cannot run. Re-record the mapping video.
 
@@ -140,7 +140,7 @@ If the mapping step fails, the rest of the pipeline cannot run. Re-record the ma
 
 Verify the ArUco tags are visible in your videos:
 ```bash
-ls /home/shrestha/sudhir_umi/datasets/<your_session>/demos/demo_*/tag_detection.pkl
+ls file_path/datasets/<your_session>/demos/demo_*/tag_detection.pkl
 ```
 Each file should be non-empty. If all are empty/missing, there is a camera intrinsics or ArUco config mismatch — ask Prof. Shrestha.
 
@@ -151,7 +151,7 @@ This usually means the `nominal_z` filter is rejecting all measurements. The def
 ```bash
 conda run -n umi --no-capture-output \
   python /opt/umi/universal_manipulation_interface/run_slam_pipeline.py \
-  /home/shrestha/sudhir_umi/datasets/<your_session>/ \
+  file_path/datasets/<your_session>/ \
   --nominal_z 0.050
 ```
 
@@ -163,7 +163,7 @@ SLAM localization can fail if the scene changes between mapping and demos (light
 
 Check which cameras failed:
 ```bash
-ls /home/shrestha/sudhir_umi/datasets/<your_session>/demos/*/camera_trajectory.csv | wc -l
+ls file_path/datasets/<your_session>/demos/*/camera_trajectory.csv | wc -l
 ```
 Divide by the total number of demo clips. If one camera has a much higher failure rate than the other, its mapping coverage was insufficient.
 

@@ -110,7 +110,7 @@ A practical approach: after placing the box, shift it a few centimeters in a ran
 Transfer all videos to the lab workstation:
 
 ```
-/home/shrestha/sudhir_umi/datasets/<your_session_name>/raw_videos/
+file_path/datasets/<your_session_name>/raw_videos/
 ```
 
 Then follow **[Step 2 — SLAM Pipeline](02_slam_pipeline.md)**.
