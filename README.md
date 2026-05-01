@@ -19,12 +19,12 @@ This repository contains everything students need to collect demonstrations, run
 
 ## Quick Links
 
-| Step | Guide | Est. Time |
-|------|-------|-----------|
-| 1. Collect demos | [Data Collection](docs/01_data_collection.md) | ~2–3 h per 100-demo session |
-| 2. Run SLAM | [SLAM Pipeline](docs/02_slam_pipeline.md) | ~1–2 h on lab workstation |
-| 3. Train on NRP | [NRP Training](docs/03_nrp_training.md) | ~5–7 days on cluster |
-| 4. Download checkpoints | [Checkpoints](docs/04_checkpoints.md) | ~5 min |
+| Step | Guide |
+|------|-------|
+| 1. Collect demos | [Data Collection](docs/01_data_collection.md) |
+| 2. Run SLAM | [SLAM Pipeline](docs/02_slam_pipeline.md) |
+| 3. Train on NRP | [NRP Training](docs/03_nrp_training.md) |
+| 4. Download checkpoints | [Checkpoints](docs/04_checkpoints.md) |
 
 ---
 
@@ -34,7 +34,7 @@ This repository contains everything students need to collect demonstrations, run
 |------|--------|
 | Robot arms | 2× Interbotix RX150 |
 | Cameras | 2× GoPro (wrist-mounted, one per gripper) |
-| Camera serials | Left: C3441324937748 · Right: C3444250515560 |
+| Camera serials | Left: `left_camera_serial` · Right: `right_camera_serial` |
 | ArUco tags | Left gripper: IDs **0, 1** · Right gripper: IDs **6, 7** |
 | NRP namespace | `ssu-intelligent-systems` |
 | PVC | `umi-workspace-pvc` (100 Gi, shared) |
@@ -58,6 +58,23 @@ isl_umi_cube_hand_off/
     ├── umi_train_cube_job.yaml  # Kubernetes training job — edit name/paths per run
     └── pvc_stage_pod.yaml       # Staging pod for uploading data to the PVC
 ```
+
+---
+
+## NRP Account Setup
+
+If you do not have an NRP account yet, follow these steps before attempting any training:
+
+1. **Join the NRP Matrix chat** (required first)
+   Go to https://element.nrp-nautilus.io and create an account. This is the official NRP community support channel.
+
+2. **Create your NRP account**
+   Go to https://portal.nrp-nautilus.io and log in using your SSU credentials via CILogon. Accept the Acceptable Use Policy when prompted.
+
+3. **Send Prof. Shrestha your registered email**
+   Send the email address you used to register so you can be added to the namespace: `ssu-isl-bimanual-dexterity`
+
+NRP training materials: https://nrp.ai/training/
 
 ---
 
