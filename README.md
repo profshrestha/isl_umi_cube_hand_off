@@ -72,7 +72,7 @@ If you do not have an NRP account yet, follow these steps before attempting any 
    Go to https://portal.nrp-nautilus.io and log in using your SSU credentials via CILogon. Accept the Acceptable Use Policy when prompted.
 
 3. **Send Prof. Shrestha your registered email**
-   Send the email address you used to register so you can be added to the namespace: `ssu-isl-bimanual-dexterity`
+   Send the email address you used to register so you can be added to the project namespace.
 
 NRP training materials: https://nrp.ai/training/
 
