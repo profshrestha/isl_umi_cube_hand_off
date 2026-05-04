@@ -72,7 +72,7 @@ Pipeline complete. Replay buffer saved to: <your_session>/replay_buffer.zarr.zip
 
 If you do not have the UMI environment set up locally, you can run the full pipeline on the ISL server where the raw videos are already available.
 
-> **Only one person should run the pipeline at a time.** If a classmate has already run it, skip to the `scp` step below — the zarr is already there.
+> **Only one person should run the pipeline at a time.**
 
 ### 1 — SSH in
 
