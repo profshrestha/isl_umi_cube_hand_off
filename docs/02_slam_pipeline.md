@@ -68,6 +68,51 @@ Pipeline complete. Replay buffer saved to: <your_session>/replay_buffer.zarr.zip
 
 ---
 
+## Optional — Run SLAM on the ISL Server
+
+If you do not have the UMI environment set up locally, you can run the full pipeline on the ISL server where the raw videos are already available.
+
+> **Only one person should run the pipeline at a time.** If a classmate has already run it, skip to the `scp` step below — the zarr is already there.
+
+### 1 — SSH in
+
+```bash
+ssh <your_username>@130.157.158.135
+```
+
+### 2 — Run the pipeline
+
+Start a `tmux` session so the job survives if your connection drops:
+
+```bash
+tmux new -s pipeline
+
+/opt/miniconda3/envs/umi/bin/python \
+  /opt/umi/universal_manipulation_interface/run_slam_pipeline.py \
+  /var/isl_robotics_shared/isl_umi/datasets/cube_hand_off/session_may326
+
+# Detach and leave it running: Ctrl+B, then D
+# Reattach later:
+tmux attach -t pipeline
+```
+
+Takes **2–4 hours**. When done you will see:
+```
+Pipeline complete. Replay buffer saved to: .../session_may326/replay_buffer.zarr.zip
+```
+
+### 3 — Copy the zarr to your machine
+
+Run this **on your local machine**:
+
+```bash
+scp <your_username>@130.157.158.135:/var/isl_robotics_shared/isl_umi/datasets/cube_hand_off/session_may326/replay_buffer.zarr.zip ~/Downloads/
+```
+
+The file is ~2–3 GB. Then continue with Step 2.3 below.
+
+---
+
 ## Step 2.3 — Check How Many Demos Were Recovered
 
 ```bash
